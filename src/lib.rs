@@ -3,6 +3,7 @@ use std::cmp::Ordering;
 use listnode::ListNode;
 
 pub mod listnode;
+pub mod median_sorted_arrays;
 
 pub struct Solution;
 
