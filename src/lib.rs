@@ -1,4 +1,7 @@
-use std::cmp::Ordering;
+use std::{
+    cmp::Ordering,
+    collections::{HashMap, HashSet},
+};
 
 use listnode::ListNode;
 
@@ -69,10 +72,10 @@ impl Solution {
         result
     }
 
-    pub fn pivot_index(nums: Vec<i32>) -> i32 {
-        let mut nums_rev = nums.clone();
+    pub fn pivot_index(nums: &[i32]) -> i32 {
+        let mut nums_rev = nums.to_vec();
         nums_rev.reverse();
-        let sums = Solution::running_sum(&nums);
+        let sums = Solution::running_sum(nums);
         let sums_rev = Solution::running_sum(&nums_rev);
         let l = nums.len();
         for i in 0..l {
@@ -81,6 +84,32 @@ impl Solution {
             }
         }
         -1
+    }
+
+    pub fn is_isomorphic(s: String, t: String) -> bool {
+        let mut m: HashMap<u8, u8> = HashMap::new();
+        let mut seen: HashSet<u8> = HashSet::new();
+        let s = s.as_bytes();
+        let t = t.as_bytes();
+
+        for i in 0..s.len() {
+            match m.get(&s[i]) {
+                Some(lu) => {
+                    if *lu != t[i] {
+                        return false;
+                    }
+                }
+                None => {
+                    if seen.contains(&t[i]) {
+                        return false;
+                    } else {
+                        m.insert(s[i], t[i]);
+                        seen.insert(t[i]);
+                    }
+                }
+            }
+        }
+        true
     }
 }
 
@@ -118,21 +147,38 @@ mod tests {
 
     #[test]
     fn test_running_sum() {
-        assert_eq!(vec![1, 3, 6, 10], Solution::running_sum(&vec![1, 2, 3, 4]));
-        assert_eq!(
-            vec![1, 2, 3, 4, 5],
-            Solution::running_sum(&vec![1, 1, 1, 1, 1])
-        );
+        assert_eq!(vec![1, 3, 6, 10], Solution::running_sum(&[1, 2, 3, 4]));
+        assert_eq!(vec![1, 2, 3, 4, 5], Solution::running_sum(&[1, 1, 1, 1, 1]));
         assert_eq!(
             vec![3, 4, 6, 16, 17],
-            Solution::running_sum(&vec![3, 1, 2, 10, 1])
+            Solution::running_sum(&[3, 1, 2, 10, 1])
         );
     }
     #[test]
     fn test_pivot_index() {
-        assert_eq!(3, Solution::pivot_index(vec![1, 7, 3, 6, 5, 6]));
+        assert_eq!(3, Solution::pivot_index(&[1, 7, 3, 6, 5, 6]));
         // 1,8,11,17,22,28   28,27,20,17,11,6
-        assert_eq!(-1, Solution::pivot_index(vec![1, 2, 3]));
-        assert_eq!(0, Solution::pivot_index(vec![2, 1, -1]));
+        assert_eq!(-1, Solution::pivot_index(&[1, 2, 3]));
+        assert_eq!(0, Solution::pivot_index(&[2, 1, -1]));
+    }
+
+    #[test]
+    fn test_is_isomorphic() {
+        assert!(Solution::is_isomorphic(
+            "egg".to_string(),
+            "add".to_string()
+        ));
+        assert!(!Solution::is_isomorphic(
+            "foo".to_string(),
+            "bar".to_string()
+        ));
+        assert!(Solution::is_isomorphic(
+            "paper".to_string(),
+            "title".to_string()
+        ));
+        assert!(!Solution::is_isomorphic(
+            "abc".to_string(),
+            "ttt".to_string()
+        ));
     }
 }

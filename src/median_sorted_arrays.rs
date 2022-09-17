@@ -15,11 +15,11 @@ fn ordered_iter<'a, T: PartialOrd>(v1: &'a Vec<T>, v2: &'a Vec<T>) -> impl Itera
     std::iter::from_fn(move || {
         if i1 == Vec::len(v1) && i2 == Vec::len(v2) {
             None
-        } else if i1 == Vec::len(v1) {
+        } else if i1 == v1.len() {
             let v = &v2[i2];
             i2 += 1;
             Some(v)
-        } else if i2 == Vec::len(v2) || v1[i1] < v2[i2] {
+        } else if i2 == v2.len() || v1[i1] < v2[i2] {
             let v = &v1[i1];
             i1 += 1;
             Some(v)
