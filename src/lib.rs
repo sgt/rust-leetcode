@@ -60,6 +60,28 @@ impl Solution {
             }))
         }
     }
+    /// Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+    pub fn running_sum(nums: &[i32]) -> Vec<i32> {
+        let (_, result) = nums.iter().fold((0, vec![]), |(sum, mut acc), i| {
+            acc.push(sum + i);
+            (sum + i, acc)
+        });
+        result
+    }
+
+    pub fn pivot_index(nums: Vec<i32>) -> i32 {
+        let mut nums_rev = nums.clone();
+        nums_rev.reverse();
+        let sums = Solution::running_sum(&nums);
+        let sums_rev = Solution::running_sum(&nums_rev);
+        let l = nums.len();
+        for i in 0..l {
+            if sums[i] == sums_rev[l - i - 1] {
+                return i as i32;
+            }
+        }
+        -1
+    }
 }
 
 #[cfg(test)]
@@ -91,6 +113,26 @@ mod tests {
                 arr_to_linkedlist(&[2, 4, 3]),
                 arr_to_linkedlist(&[5, 6, 4])
             ))
-        )
+        );
+    }
+
+    #[test]
+    fn test_running_sum() {
+        assert_eq!(vec![1, 3, 6, 10], Solution::running_sum(&vec![1, 2, 3, 4]));
+        assert_eq!(
+            vec![1, 2, 3, 4, 5],
+            Solution::running_sum(&vec![1, 1, 1, 1, 1])
+        );
+        assert_eq!(
+            vec![3, 4, 6, 16, 17],
+            Solution::running_sum(&vec![3, 1, 2, 10, 1])
+        );
+    }
+    #[test]
+    fn test_pivot_index() {
+        assert_eq!(3, Solution::pivot_index(vec![1, 7, 3, 6, 5, 6]));
+        // 1,8,11,17,22,28   28,27,20,17,11,6
+        assert_eq!(-1, Solution::pivot_index(vec![1, 2, 3]));
+        assert_eq!(0, Solution::pivot_index(vec![2, 1, -1]));
     }
 }

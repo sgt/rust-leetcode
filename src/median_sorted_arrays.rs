@@ -1,4 +1,3 @@
-
 pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
     let total_len = Vec::len(&nums1) + Vec::len(&nums2);
     let mut ordered = ordered_iter(&nums1, &nums2);
@@ -10,10 +9,7 @@ pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
     }
 }
 
-fn ordered_iter<'a, T: PartialOrd>(
-    v1: &'a Vec<T>,
-    v2: &'a Vec<T>,
-) -> impl Iterator<Item = &'a T> + 'a {
+fn ordered_iter<'a, T: PartialOrd>(v1: &'a Vec<T>, v2: &'a Vec<T>) -> impl Iterator<Item = &'a T> {
     let mut i1 = 0;
     let mut i2 = 0;
     std::iter::from_fn(move || {
