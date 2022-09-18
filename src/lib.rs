@@ -3,7 +3,7 @@ use std::{
     collections::{HashMap, HashSet},
 };
 
-use listnode::ListNode;
+use listnode::{linkedlist_len, linkedlist_skip, ListNode};
 
 pub mod listnode;
 pub mod median_sorted_arrays;
@@ -111,10 +111,16 @@ impl Solution {
         }
         true
     }
+
+    pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let len = linkedlist_len(&head);
+        linkedlist_skip(head, len / 2)
+    }
 }
 
 #[cfg(test)]
 mod tests {
+
     use crate::{
         listnode::{arr_to_linkedlist, linkedlist_to_vec},
         Solution,
@@ -131,14 +137,14 @@ mod tests {
     fn test_add_two_numbers() {
         assert_eq!(
             vec![0],
-            linkedlist_to_vec(Solution::add_two_numbers(
+            linkedlist_to_vec(&Solution::add_two_numbers(
                 arr_to_linkedlist(&[0]),
                 arr_to_linkedlist(&[0])
             ))
         );
         assert_eq!(
             vec![7, 0, 8],
-            linkedlist_to_vec(Solution::add_two_numbers(
+            linkedlist_to_vec(&Solution::add_two_numbers(
                 arr_to_linkedlist(&[2, 4, 3]),
                 arr_to_linkedlist(&[5, 6, 4])
             ))
@@ -180,5 +186,19 @@ mod tests {
             "abc".to_string(),
             "ttt".to_string()
         ));
+    }
+
+    #[test]
+    fn test_middle_node() {
+        assert_eq!(
+            vec![3, 4, 5],
+            linkedlist_to_vec(&Solution::middle_node(arr_to_linkedlist(&[1, 2, 3, 4, 5])))
+        );
+        assert_eq!(
+            vec![4, 5, 6],
+            linkedlist_to_vec(&Solution::middle_node(arr_to_linkedlist(&[
+                1, 2, 3, 4, 5, 6
+            ])))
+        );
     }
 }
