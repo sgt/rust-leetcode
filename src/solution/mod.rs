@@ -9,3 +9,4 @@ pub mod s0704_binary_search;
 pub mod s0724_find_pivot_index;
 pub mod s0876_middle_of_linked_list;
 pub mod s1480_running_sum_of_1d_array;
+pub mod s0242_valid_anagram;
