@@ -7,6 +7,7 @@ use listnode::{linkedlist_len, linkedlist_skip, ListNode};
 
 pub mod listnode;
 pub mod median_sorted_arrays;
+pub mod rotated_arrays;
 
 pub struct Solution;
 
