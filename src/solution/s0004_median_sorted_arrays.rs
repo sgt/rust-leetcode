@@ -1,6 +1,7 @@
-use crate::Solution;
+pub struct Solution;
 
 impl Solution {
+    /// 4. Median of Two Sorted Arrays
     pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
         let total_len = Vec::len(&nums1) + Vec::len(&nums2);
         let mut ordered = Self::ordered_iter(&nums1, &nums2);
@@ -40,12 +41,18 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::median_sorted_arrays::*;
+    use super::*;
 
     #[test]
     fn test_find_median_sorted_arrays() {
-        assert_eq!(2.5, Solution::find_median_sorted_arrays(vec![1, 2], vec![3, 4]));
+        assert_eq!(
+            2.5,
+            Solution::find_median_sorted_arrays(vec![1, 2], vec![3, 4])
+        );
         assert_eq!(3.5, Solution::find_median_sorted_arrays(vec![], vec![3, 4]));
-        assert_eq!(3.0, Solution::find_median_sorted_arrays(vec![1, 2], vec![3, 4, 5]));
+        assert_eq!(
+            3.0,
+            Solution::find_median_sorted_arrays(vec![1, 2], vec![3, 4, 5])
+        );
     }
 }
