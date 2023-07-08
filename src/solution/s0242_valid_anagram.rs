@@ -1,4 +1,4 @@
-use std::{collections::HashMap};
+use std::collections::HashMap;
 
 pub struct Solution;
 
@@ -22,9 +22,9 @@ mod tests {
     use super::*;
     use test_case::test_case;
 
-    #[test_case(true, "anagram", "nagaram")]
-    #[test_case(false, "rat", "car")]
-    fn test(result: bool, s: &str, t: &str) {
-        assert_eq!(result, Solution::is_anagram(s.into(), t.into()));
+    #[test_case("anagram", "nagaram" => true ; "happy")]
+    #[test_case("rat", "car" => false; "unhappy")]
+    fn test(s: &str, t: &str) -> bool {
+        Solution::is_anagram(s.into(), t.into())
     }
 }
