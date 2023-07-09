@@ -3,6 +3,7 @@ pub mod s0002_add_two_numbers;
 pub mod s0004_median_sorted_arrays;
 pub mod s0018_4sum;
 pub mod s0033_search_in_rotated_sorted_array;
+pub mod s0049_group_anagrams;
 pub mod s0081_search_in_rotated_sorted_array_2;
 pub mod s0167_two_sum2;
 pub mod s0205_isomorphic_strings;
