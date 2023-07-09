@@ -1,4 +1,4 @@
-use std::{cmp::Ordering, collections::BTreeSet};
+use std::cmp::Ordering;
 
 pub struct Solution;
 
@@ -10,7 +10,7 @@ impl Solution {
 
     pub fn k_sum(k: usize, nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let mut nums = nums;
-        nums.sort();
+        nums.sort_unstable();
         Self::k_sum_rec(k, &nums, target)
     }
 
@@ -22,8 +22,11 @@ impl Solution {
         match k {
             2 => Self::two_sum(nums, target),
             _ if k > 2 => {
-                let mut result = BTreeSet::new();
+                let mut result = vec![];
                 for (i, &n) in nums.iter().enumerate() {
+                    if i > 0 && nums[i - 1] == n {
+                        continue;
+                    }
                     let mut result_per_n =
                         Self::k_sum_rec(k - 1, &nums[i + 1..], target.saturating_sub(n));
                     for v in result_per_n.iter_mut() {
@@ -42,6 +45,14 @@ impl Solution {
         let (mut left, mut right) = (0, nums.len() - 1);
         let mut result = vec![];
         while left < right {
+            if left > 0 && nums[left] == nums[left - 1] {
+                left += 1;
+                continue;
+            }
+            if right < nums.len() - 1 && nums[right] == nums[right + 1] {
+                right -= 1;
+                continue;
+            }
             let sum = nums[left].saturating_add(nums[right]);
             match sum.cmp(&target) {
                 Ordering::Equal => {
