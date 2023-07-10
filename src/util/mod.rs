@@ -1,5 +1,8 @@
 pub mod list_node;
 
+#[macro_use]
+mod vec_string;
+
 #[cfg(test)]
 pub mod test_util {
     use std::fmt::Debug;

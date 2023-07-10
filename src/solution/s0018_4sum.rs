@@ -80,9 +80,8 @@ mod tests {
     #[test_case(vec![1000000000,1000000000,1000000000,1000000000], -294967296 => with |v:Vec<Vec<i32>>| assert!(v.is_empty()) ; "overflow")]
     fn test_four_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         // make the result and the items sorted so order doesn't matter
-        // TODO maybe make this a util "any_order_vec_of_vecs" and use test_case's "using" syntax
         Solution::four_sum(nums, target)
-            .into_iter()
+            .iter()
             .map(|v| v.iter().copied().sorted().collect())
             .sorted()
             .collect_vec()
