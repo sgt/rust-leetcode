@@ -23,6 +23,7 @@ impl Solution {
     /// O(n*log(n)) solution
     pub fn length_of_lis_efficient(nums: Vec<i32>) -> i32 {
         let mut result: i32 = 0;
+        // d[l] stores lowest element with which a LIS of length l is terminated
         let mut d: Vec<i32> = vec![i32::MAX; nums.len() + 1];
         d[0] = i32::MIN;
         for n in nums {
