@@ -8,6 +8,7 @@ pub mod s0081_search_in_rotated_sorted_array_2;
 pub mod s0167_two_sum2;
 pub mod s0205_isomorphic_strings;
 pub mod s0242_valid_anagram;
+pub mod s0300_longest_increasing_subsequence;
 pub mod s0409_longest_palindrome;
 pub mod s0704_binary_search;
 pub mod s0724_find_pivot_index;

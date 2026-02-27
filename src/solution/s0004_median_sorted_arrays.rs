@@ -5,7 +5,7 @@ impl Solution {
     pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
         let total_len = Vec::len(&nums1) + Vec::len(&nums2);
         let mut ordered = Self::ordered_iter(&nums1, &nums2);
-        if total_len % 2 == 0 {
+        if total_len.is_multiple_of(2) {
             let result: Vec<&i32> = ordered.skip(total_len / 2 - 1).take(2).collect();
             ((result[0] + result[1]) as f64) / 2.0
         } else {
