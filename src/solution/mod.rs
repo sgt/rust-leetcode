@@ -1,6 +1,7 @@
 pub mod s0001_two_sum;
 pub mod s0002_add_two_numbers;
 pub mod s0004_median_sorted_arrays;
+pub mod s0005_longest_palindromic_substring;
 pub mod s0018_4sum;
 pub mod s0033_search_in_rotated_sorted_array;
 pub mod s0049_group_anagrams;
